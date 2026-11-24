@@ -13,6 +13,9 @@
 
 </div>
 
+> [!CAUTION]
+> **Legal Disclaimer:** Koma is intended for **personal archival of content you have legally purchased or have the right to access**. The developer(s) bear **zero responsibility** for any misuse, copyright infringement, ToS violations, or legal consequences arising from your use of this tool. By using this software, you accept full and sole responsibility for your actions. See [DISCLAIMER.md](DISCLAIMER.md) for the full disclaimer.
+
 ---
 
 ### 📖 About Koma
