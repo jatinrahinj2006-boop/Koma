@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manga PDF Studio & Chapter Organizer</title>
+  <link rel="stylesheet" href="pdf-maker.css">
+</head>
+<body>
+  <!-- Top Global Navigation Header -->
+  <header class="app-top-nav">
+    <div class="nav-brand-group">
+      <img src="../icons/icon-48.png" alt="Logo" width="28" height="28" class="nav-logo">
+      <div class="nav-brand-text">
+        <span class="nav-title">Manga PDF Suite</span>
+        <span class="nav-subtitle">Compiler & Duplicate Checker</span>
+      </div>
+    </div>
+
+    <div class="nav-tabs-group">
+      <button class="nav-tab-btn active" id="tab-btn-studio" type="button">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        <span>⚡ PDF Studio & Compiler</span>
+      </button>
+      <button class="nav-tab-btn" id="tab-btn-dupchecker" type="button">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>🔍 PDF Duplicate Checker</span>
+        <span class="dup-tab-badge" id="header-dup-badge" style="display: none;">0 Dups</span>
+      </button>
+    </div>
+
+    <div class="nav-status-group">
+      <span class="status-indicator-pill">Ready</span>
+    </div>
+  </header>
+
+  <!-- TAB 1: Existing PDF Studio & Organizer -->
+  <div id="view-studio" class="app-tab-pane active">
+  <div class="studio-layout">
+    <!-- Sidebar Controls -->
+    <aside class="studio-sidebar">
+      <div class="brand">
+        <img src="../icons/icon-48.png" alt="Logo" width="32" height="32" class="brand-logo">
+        <div>
+          <h1>PDF Studio</h1>
+          <span class="sub-badge">Manga & Manhwa Organizer</span>
+        </div>
+      </div>
+
+      <!-- Upload Actions -->
+      <div class="sidebar-section">
+        <label class="section-title">Import Manga Files</label>
+        <div class="button-stack">
+          <button type="button" class="action-btn upload-btn" id="btn-browse-zip">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span>Upload ZIP / CBZ / Archives</span>
+          </button>
+          <input type="file" id="zip-file-input" accept=".zip,.cbz,.webp,.jpg,.jpeg,.png,.avif,.gif,.bmp" multiple style="display: none;">
+
+          <button type="button" class="action-btn upload-btn secondary" id="btn-browse-folder">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            <span>Upload Folder (With Sub-Folders)</span>
+          </button>
+          <input type="file" id="folder-file-input" webkitdirectory directory multiple style="display: none;">
+
+          <button type="button" class="action-btn upload-btn secondary" id="btn-browse-images">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Upload Loose Images (.webp, .jpg, .png)</span>
+          </button>
+          <input type="file" id="image-file-input" accept=".webp,.jpg,.jpeg,.png,.avif,.gif,.bmp" multiple style="display: none;">
+        </div>
+      </div>
+
+      <!-- Compilation Settings -->
+      <div class="sidebar-section">
+        <label class="section-title">Output Settings</label>
+        
+        <div class="form-group">
+          <label for="series-name-input">Manga / Series Title:</label>
+          <input type="text" id="series-name-input" class="form-input" placeholder="e.g. Solo Leveling">
+        </div>
+
+        <div class="form-group">
+          <label for="output-mode-select">Output Mode:</label>
+          <select id="output-mode-select" class="form-select">
+            <option value="combined">Single Combined Omnibus PDF (with Chapter Bookmarks)</option>
+            <option value="volume">Volume Bundles (Split every X Chapters)</option>
+            <option value="individual" selected>1 PDF per Folder → ZIP Download (Recommended)</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="volume-split-group" style="display: none;">
+          <label for="volume-split-count">Chapters per Volume:</label>
+          <input type="number" id="volume-split-count" class="form-input" value="10" min="1" max="100">
+        </div>
+
+        <div class="form-group" id="naming-template-group">
+          <label for="naming-template-select">PDF Filename in ZIP:</label>
+          <select id="naming-template-select" class="form-select">
+            <option value="folder" selected>{folder}.pdf (Folder Name directly)</option>
+            <option value="series_folder">{series} - {folder}.pdf</option>
+            <option value="series_vol_folder">{series} - Vol.{vol} {folder}.pdf</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="reading-direction-select">Reading Direction:</label>
+          <select id="reading-direction-select" class="form-select">
+            <option value="vertical" selected>Vertical Scroll (Manhwa / Webtoon)</option>
+            <option value="rtl">Right-to-Left (Japanese Manga)</option>
+            <option value="ltr">Left-to-Right (Western Comic)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="quality-select">Compression & Quality:</label>
+          <select id="quality-select" class="form-select">
+            <option value="1.0">Ultra / Lossless (100% Quality)</option>
+            <option value="0.88" selected>Balanced (88% - Recommended)</option>
+            <option value="0.75">Compact / E-Reader (75% - Small Size)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="normalize-width-select">Page Width:</label>
+          <select id="normalize-width-select" class="form-select">
+            <option value="original" selected>Keep Original Aspect Ratio</option>
+            <option value="normalize">Normalize to Standard Width (1000px)</option>
+          </select>
+        </div>
+
+        <div class="toggle-group">
+          <label class="checkbox-container">
+            <input type="checkbox" id="eink-grayscale-toggle">
+            <span class="checkmark"></span>
+            <span>E-Ink / Kindle Grayscale Boost</span>
+          </label>
+          <label class="checkbox-container">
+            <input type="checkbox" id="webtoon-slice-toggle" checked>
+            <span class="checkmark"></span>
+            <span>Auto-Slice Ultra-Tall Webtoons</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Duplicate Detection Summary Card -->
+      <div class="sidebar-section" id="duplicate-sidebar-section" style="display: none;">
+        <div class="dup-card">
+          <div class="dup-header">
+            <span class="dup-badge" id="dup-badge-count">0 Duplicates</span>
+            <button id="btn-auto-exclude-dups" class="small-btn danger">Skip All Dups</button>
+          </div>
+          <p class="dup-desc">Identical pages detected across chapters.</p>
+          <div id="credit-banner-wrap" style="display: none; margin-top: 6px; padding-top: 6px; border-top: 1px dashed rgba(245, 158, 11, 0.3);">
+            <button id="btn-auto-exclude-credits" class="small-btn warning" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 4px;">
+              <span>🧹 Exclude Scanlation Credit Banners</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- History & Past Compilation Card -->
+      <div class="sidebar-section" id="history-sidebar-section">
+        <div class="dup-card" id="history-dup-card" style="display: none; background: rgba(99, 102, 241, 0.1); border-color: rgba(99, 102, 241, 0.3);">
+          <div class="dup-header">
+            <span class="dup-badge" id="history-dup-count" style="color: #a5b4fc;">0 in History</span>
+            <button id="btn-skip-history-compiled" class="small-btn">Skip Compiled</button>
+          </div>
+          <p class="dup-desc">Some imported chapters were previously compiled into PDFs.</p>
+        </div>
+        <div class="history-accordion">
+          <div class="history-header-row" id="toggle-history-list" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; padding: 4px 0;">
+            <label class="section-title" style="cursor: pointer; margin: 0;">Recent Export History</label>
+            <div style="display: flex; gap: 6px; align-items: center;">
+              <button id="btn-clear-pdf-history" class="small-btn" style="font-size: 10px; padding: 2px 6px;">Clear</button>
+              <span id="history-expand-icon" style="font-size: 11px; color: var(--text-muted);">▼</span>
+            </div>
+          </div>
+          <div id="pdf-history-items" class="history-items-container" style="display: none; max-height: 140px; overflow-y: auto; margin-top: 6px;">
+            <p class="dup-desc" id="history-empty-text">No previous PDF exports recorded.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Button -->
+      <div class="compile-box">
+        <button id="btn-compile-pdf" class="compile-btn" disabled>
+          <span class="btn-icon">⚡</span>
+          <span>Generate PDF Document</span>
+        </button>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="progress-wrap" id="progress-wrap" style="display: none;">
+        <div class="progress-labels">
+          <span id="progress-status">Compiling...</span>
+          <span id="progress-percent">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
+        </div>
+        <p class="progress-sub" id="progress-sub">Processing images...</p>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="studio-main">
+      <!-- Top Action Bar -->
+      <header class="main-header">
+        <div class="stats-bar">
+          <div class="stat-pill"><span class="pill-label">Chapters:</span> <strong id="stat-chapters">0</strong></div>
+          <div class="stat-pill"><span class="pill-label">Total Pages:</span> <strong id="stat-pages">0</strong></div>
+          <div class="stat-pill"><span class="pill-label">Selected:</span> <strong id="stat-selected">0</strong></div>
+          <div class="stat-pill dup-pill" id="stat-dup-pill" style="display: none;"><span class="pill-label">Duplicates:</span> <strong id="stat-dups">0</strong></div>
+          <div class="stat-pill hist-pill" id="stat-hist-pill" style="display: none;"><span class="pill-label">In History:</span> <strong id="stat-hist">0</strong></div>
+        </div>
+
+        <div class="header-actions">
+          <button id="btn-expand-all" class="secondary-btn" title="Expand and Preview All Pages">👁️ Preview All</button>
+          <button id="btn-collapse-all" class="secondary-btn" title="Collapse All Chapter Previews">📁 Collapse</button>
+          <button id="btn-reverse-all" class="secondary-btn" title="Reverse Chapter Order">🔄 Flip</button>
+          <button id="btn-select-all" class="secondary-btn">Select All</button>
+          <button id="btn-deselect-all" class="secondary-btn">Deselect All</button>
+          <button id="btn-clear-all" class="secondary-btn danger">Clear</button>
+        </div>
+      </header>
+
+      <!-- Empty State Dropzone -->
+      <div class="dropzone-empty" id="dropzone-empty">
+        <div class="drop-illustration">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <h2>Drop ZIP / CBZ Files or Manga Folders Here</h2>
+        <p>Supports multi-chapter ZIPs, folders with subfolders, and all image formats (.jpg, .png, .webp, .avif, .gif, .bmp).</p>
+        <div class="drop-btn-row">
+          <button class="primary-btn" onclick="document.getElementById('zip-file-input').click()">Browse ZIP Files</button>
+          <button class="secondary-btn" id="btn-dropzone-folder">Browse Folder (With Sub-Folders)</button>
+          <button class="secondary-btn" onclick="document.getElementById('image-file-input').click()">Browse Images (.webp)</button>
+        </div>
+      </div>
+
+      <!-- Chapter Accordion Container -->
+      <div class="chapters-container" id="chapters-container" style="display: none;">
+        <!-- Chapters populated dynamically -->
+      </div>
+    </main>
+  </div> <!-- end .studio-layout -->
+  </div> <!-- end #view-studio -->
+
+  <!-- TAB 2: PDF Duplicate Checker & Content Comparator -->
+  <div id="view-dupchecker" class="app-tab-pane" style="display: none;">
+    <div class="dup-checker-layout">
+      <!-- Duplicate Checker Sidebar -->
+      <aside class="dup-sidebar">
+        <div class="brand">
+          <div class="dup-brand-icon">🔍</div>
+          <div>
+            <h1>Duplicate Checker</h1>
+            <span class="sub-badge">Deep Content & Hash Matcher</span>
+          </div>
+        </div>
+
+        <!-- Upload PDF Files -->
+        <div class="sidebar-section">
+          <label class="section-title">Import PDF Documents</label>
+          <div class="button-stack">
+            <button type="button" class="action-btn upload-btn" id="btn-dup-browse-files">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+              <span>Upload PDF Files (Multi-Select)</span>
+            </button>
+            <input type="file" id="dup-file-input" accept=".pdf" multiple hidden>
+
+            <button type="button" class="action-btn upload-btn secondary" id="btn-dup-browse-folder">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+              <span>Upload Folder with PDFs</span>
+            </button>
+            <input type="file" id="dup-folder-input" webkitdirectory directory multiple hidden>
+          </div>
+        </div>
+
+        <!-- Matching Sensitivity & Settings -->
+        <div class="sidebar-section">
+          <label class="section-title">Comparison Criteria</label>
+
+          <div class="form-group">
+            <label for="dup-matching-mode">Matching Mode:</label>
+            <select id="dup-matching-mode" class="form-select">
+              <option value="smart" selected>Smart: Deep Content + Name Match (Recommended)</option>
+              <option value="strict">Strict: 100% Identical Content Hashes Only</option>
+              <option value="near">High Similarity: Over 75% Shared Pages</option>
+              <option value="name_only">Filename Match Only (Ignore Content)</option>
+            </select>
+          </div>
+
+          <div class="toggle-group">
+            <label class="checkbox-container">
+              <input type="checkbox" id="dup-ignore-credits" checked>
+              <span class="checkmark"></span>
+              <span>Ignore Repeated Credit / Outro Pages</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Deduplication Actions -->
+        <div class="sidebar-section">
+          <label class="section-title">Deduplication Actions</label>
+          <div class="dup-actions-column">
+            <button id="btn-dup-autoselect" class="action-btn primary-action-btn" title="Keep the best original file in each set and mark redundant copies for deletion">
+              <span>⚡ Auto-Select Redundant Copies</span>
+            </button>
+            <button id="btn-dup-download-clean" class="action-btn secondary" title="Bundle only the unique, kept PDFs into a clean ZIP">
+              <span>📦 Download Cleaned PDFs (.ZIP)</span>
+            </button>
+            <div style="display: flex; gap: 8px;">
+              <button id="btn-dup-export-report" class="action-btn secondary" style="flex: 1;" title="Export duplicate findings report">
+                <span>📑 Export Report</span>
+              </button>
+              <button id="btn-dup-clear-all" class="action-btn secondary danger" style="flex: 1;" title="Clear all PDFs from memory">
+                <span>🗑️ Clear All</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search & Filter Controls -->
+        <div class="sidebar-section">
+          <label class="section-title">Filter Findings</label>
+          <div class="dup-search-box">
+            <input type="text" id="dup-search-input" class="form-input" placeholder="🔍 Filter by PDF title / path…">
+          </div>
+          <div class="dup-filter-pills">
+            <button class="dup-filter-pill active" data-filter="all">All</button>
+            <button class="dup-filter-pill" data-filter="dups">Duplicates</button>
+            <button class="dup-filter-pill" data-filter="exact">100% Match</button>
+            <button class="dup-filter-pill" data-filter="near">Near Match</button>
+            <button class="dup-filter-pill" data-filter="unique">Unique</button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Duplicate Checker Main View -->
+      <main class="dup-main">
+        <!-- Top Stats Bar -->
+        <header class="main-header">
+          <div class="stats-bar">
+            <div class="stat-pill"><span class="pill-label">PDFs:</span> <strong id="dup-stat-total-pdfs">0</strong></div>
+            <div class="stat-pill"><span class="pill-label">Total Pages:</span> <strong id="dup-stat-total-pages">0</strong></div>
+            <div class="stat-pill dup-pill"><span class="pill-label">Duplicate Sets:</span> <strong id="dup-stat-dup-sets">0</strong></div>
+            <div class="stat-pill hist-pill"><span class="pill-label">Redundant Space:</span> <strong id="dup-stat-saved-space">0 B</strong></div>
+          </div>
+
+          <div class="header-actions">
+            <button id="btn-dup-expand-all" class="secondary-btn" title="Expand All Duplicate Groups">👁️ Expand All</button>
+            <button id="btn-dup-collapse-all" class="secondary-btn" title="Collapse All">📁 Collapse All</button>
+          </div>
+        </header>
+
+        <!-- Scanning Progress Bar -->
+        <div class="progress-wrap" id="dup-progress-wrap" style="display: none; margin: 12px 24px 0 24px;">
+          <div class="progress-labels">
+            <span id="dup-progress-status">Analyzing PDF content…</span>
+            <span id="dup-progress-percent">0%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="dup-progress-fill" style="width: 0%;"></div>
+          </div>
+          <p class="progress-sub" id="dup-progress-sub">Extracting page streams…</p>
+        </div>
+
+        <!-- Empty State Dropzone -->
+        <div class="dropzone-empty" id="dup-dropzone-empty">
+          <div class="drop-illustration">
+            <svg width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><circle cx="11" cy="14" r="3"/><line x1="16" y1="19" x2="13.5" y2="16.5"/></svg>
+          </div>
+          <h2>Drop Any Manga or Manhwa PDFs Here</h2>
+          <p>Scans internal page image streams, visual fingerprints, and titles to detect identical and partial duplicate PDFs.</p>
+          <div class="drop-btn-row">
+            <button class="primary-btn" id="dup-drop-btn-files">Browse PDF Files</button>
+            <button class="secondary-btn" id="dup-drop-btn-folder">Browse Folder with PDFs</button>
+          </div>
+        </div>
+
+        <!-- Results Container -->
+        <div class="dup-results-container" id="dup-results-container" style="display: none;">
+          <div class="dup-groups-list" id="dup-groups-list"></div>
+          <div class="dup-unique-list" id="dup-unique-list"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Visual Page-by-Page Diff Comparison Modal -->
+  <div id="dup-diff-modal" class="modal hidden">
+    <div class="modal-backdrop" id="dup-diff-backdrop"></div>
+    <div class="dup-diff-container">
+      <div class="dup-diff-header">
+        <div>
+          <h3 id="dup-diff-title">Visual Page-by-Page Comparison</h3>
+          <p id="dup-diff-subtitle" class="dup-diff-sub">Comparing content streams across files</p>
+        </div>
+        <button id="dup-diff-close" class="icon-btn text-muted" style="font-size: 20px;">✕</button>
+      </div>
+      <div class="dup-diff-body" id="dup-diff-grid"></div>
+    </div>
+  </div>
+
+  <!-- Fullscreen Lightbox Preview Modal -->
+  <div id="lightbox-modal" class="modal hidden">
+    <div class="modal-backdrop" id="lightbox-backdrop"></div>
+    <div class="lightbox-container">
+      <div class="lightbox-header">
+        <span id="lightbox-title">Page Preview</span>
+        <button id="lightbox-close" class="icon-btn text-muted" style="font-size: 20px;">✕</button>
+      </div>
+      <div class="lightbox-body">
+        <button id="lightbox-prev" class="lightbox-nav-btn prev" title="Previous Page (Left Arrow)">◀</button>
+        <img id="lightbox-img" src="" alt="Manga Page">
+        <button id="lightbox-next" class="lightbox-nav-btn next" title="Next Page (Right Arrow)">▶</button>
+      </div>
+      <div class="lightbox-footer">
+        <span id="lightbox-counter">Page 1 of 1</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="../lib/jszip.min.js"></script>
+  <script src="pdf-maker.js"></script>
+  <script src="pdf-dup-checker.js"></script>
+</body>
+</html>

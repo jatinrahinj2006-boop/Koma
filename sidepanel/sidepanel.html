@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Koma — Panel Reviewer</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <div class="sidepanel-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <div class="icon-wrap">
+          <img src="../icons/icon-48.png" alt="Logo" width="24" height="24" style="border-radius: 4px;">
+        </div>
+        <div class="brand-info">
+          <h2>Koma Reviewer</h2>
+          <span class="site-badge" id="sp-site-badge">Detecting...</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Info Banner with Editable ZIP Title -->
+    <div class="series-card">
+      <div class="input-row">
+        <label for="sp-series-title-input" class="input-label">ZIP Name:</label>
+        <input type="text" id="sp-series-title-input" class="sp-title-input" placeholder="Manga Title..." value="Reading Comic...">
+      </div>
+      <div class="series-meta">
+        <span id="sp-chapter-label">Chapter: --</span>
+        <span class="history-badge hidden" id="sp-history-badge">Last: Ch --</span>
+        <span class="panels-count" id="sp-panels-count">0 Panels</span>
+      </div>
+    </div>
+
+    <!-- Format Stats Toolbar -->
+    <div class="toolbar">
+      <div class="format-badges" id="sp-format-badges">
+        <span class="badge fmt-badge">WEBP</span>
+        <span class="badge fmt-badge">JPG</span>
+        <span class="badge fmt-badge">PNG</span>
+      </div>
+      <div class="selection-actions">
+        <button id="sp-btn-all" class="text-btn">Select All</button>
+        <span class="dot">•</span>
+        <button id="sp-btn-none" class="text-btn">Deselect All</button>
+      </div>
+    </div>
+
+    <!-- Panel Thumbnail Grid Gallery -->
+    <main class="panel-grid-container" id="sp-panel-grid">
+      <div class="empty-state" id="sp-empty-state">
+        <p>No manga panels detected yet. Open a chapter page or click Scan below.</p>
+      </div>
+    </main>
+
+    <!-- Controls Footer -->
+    <footer class="controls-footer">
+      <div class="settings-row">
+        <div class="select-field">
+          <label for="sp-format-select">Format:</label>
+          <select id="sp-format-select">
+            <option value="zip">ZIP Archive (.zip)</option>
+            <option value="cbz">CBZ Archive (.cbz)</option>
+            <option value="pdf">PDF Document (.pdf)</option>
+            <option value="folder">Subfolder Directory</option>
+          </select>
+        </div>
+        <div class="select-field">
+          <label for="sp-delay-select">Delay:</label>
+          <select id="sp-delay-select">
+            <option value="0">0ms (Fastest)</option>
+            <option value="150" selected>150ms</option>
+            <option value="500">500ms</option>
+            <option value="1000">1000ms</option>
+          </select>
+        </div>
+      </div>
+      <div class="settings-row toggles-row">
+        <label class="toggle-label" style="color: #a5b4fc; font-weight: 600;"><input type="checkbox" id="sp-parallel-toggle" checked> ⚡ 5x Parallel</label>
+        <label class="toggle-label"><input type="checkbox" id="sp-high-res-toggle" checked> High-Res</label>
+        <label class="toggle-label"><input type="checkbox" id="sp-auto-split-toggle" checked> Split Strips</label>
+        <label class="toggle-label"><input type="checkbox" id="sp-filter-promos-toggle" checked> No Promos</label>
+        <label class="toggle-label"><input type="checkbox" id="sp-enhance-contrast-toggle"> Contrast</label>
+      </div>
+
+      <div class="action-buttons-row">
+        <button id="sp-btn-pdf-studio" class="secondary-btn" title="Open Manga PDF Studio" style="border-color: rgba(99, 102, 241, 0.4); color: #a5b4fc;">
+          <span>🛠️ PDF Studio</span>
+        </button>
+        <button id="sp-btn-pdf-preview" class="secondary-btn">
+          <span>📄 Preview</span>
+        </button>
+        <button id="sp-btn-download-selected" class="primary-btn">
+          <span>⚡ Download (<span id="sp-selected-count">0</span>)</span>
+        </button>
+      </div>
+    </footer>
+
+    <!-- Progress Card -->
+    <div class="progress-card hidden" id="sp-progress-card">
+      <div class="progress-info">
+        <span id="sp-progress-title">Downloading...</span>
+        <span id="sp-progress-pct">0%</span>
+      </div>
+      <div class="bar-bg">
+        <div class="bar-fill" id="sp-progress-fill" style="width:0%"></div>
+      </div>
+      <p class="progress-sub" id="sp-progress-sub">Processing...</p>
+      <button id="sp-btn-cancel" class="cancel-btn">Cancel Download</button>
+    </div>
+
+    <!-- Download Queue Card -->
+    <div class="queue-card hidden" id="sp-queue-card">
+      <div class="queue-header">
+        <span>📋 Download Queue (<span id="sp-queue-count">0</span>)</span>
+        <button id="sp-btn-clear-queue" class="text-link">Clear Done</button>
+      </div>
+      <div class="queue-list" id="sp-queue-list">
+        <!-- Dynamically populated queue items -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Live PDF Previewer Modal -->
+  <div class="lightbox-modal hidden" id="sp-pdf-modal">
+    <span class="lightbox-close" id="sp-pdf-modal-close">&times;</span>
+    <div class="pdf-modal-card">
+      <div class="pdf-modal-header">
+        <span>📄 Live PDF Page Preview (<span id="sp-pdf-current-page">1</span>/<span id="sp-pdf-total-pages">1</span>)</span>
+      </div>
+      <div class="pdf-preview-viewport">
+        <img id="sp-pdf-img" src="" alt="PDF Page Preview">
+      </div>
+      <div class="pdf-nav-row">
+        <button id="sp-pdf-prev-btn" class="secondary-btn small-btn">◀ Prev Page</button>
+        <button id="sp-pdf-next-btn" class="secondary-btn small-btn">Next Page ▶</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-modal hidden" id="sp-lightbox-modal">
+    <span class="lightbox-close" id="sp-lightbox-close">&times;</span>
+    <div class="lightbox-content">
+      <img id="sp-lightbox-img" src="" alt="Full Preview">
+    </div>
+  </div>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>

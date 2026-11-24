@@ -1,0 +1,73 @@
+{
+  "manifest_version": 3,
+  "name": "Koma — Manga & Manhwa Downloader",
+  "version": "1.3.4",
+  "description": "Batch download manhwa & manga chapters with 1-click. Features Chrome Side Panel panel reviewer, ZIP archives, and auto chapter ranges.",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "side_panel": {
+    "default_path": "sidepanel/sidepanel.html"
+  },
+  "background": {
+    "service_worker": "background/service-worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content/content-script.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "downloads",
+    "storage",
+    "tabs",
+    "activeTab",
+    "scripting",
+    "sidePanel",
+    "contextMenus",
+    "notifications",
+    "alarms",
+    "declarativeNetRequest"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "tools/pdf-maker.html",
+        "tools/pdf-maker.css",
+        "tools/pdf-maker.js",
+        "tools/pdf-dup-checker.js",
+        "lib/jszip.min.js"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "commands": {
+    "download_current_chapter": {
+      "suggested_key": {
+        "default": "Alt+Shift+D"
+      },
+      "description": "Quick Download Current Chapter"
+    },
+    "open_side_panel": {
+      "suggested_key": {
+        "default": "Alt+Shift+S"
+      },
+      "description": "Open Reviewer Side Panel"
+    }
+  }
+}
