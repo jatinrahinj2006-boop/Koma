@@ -1053,7 +1053,7 @@
             thumbImg.loading = 'lazy';
             thumbWrap.appendChild(thumbImg);
           } else {
-            thumbWrap.innerHTML = `<div class="dup-thumb-placeholder">📄 PDF</div>`;
+            thumbWrap.innerHTML = `<div class="dup-thumb-placeholder">PDF</div>`;
           }
 
           // Metadata Info
@@ -1338,7 +1338,7 @@
         leftCol.innerHTML = `
           <div class="diff-page-num">File A · Page ${i + 1}</div>
           <div class="diff-img-box">
-            ${pageA.previewUrl ? `<img src="${pageA.previewUrl}" alt="A-${i+1}">` : `<div class="diff-placeholder">📄 Page ${i+1}</div>`}
+            ${pageA.previewUrl ? `<img src="${pageA.previewUrl}" alt="A-${i+1}">` : `<div class="diff-placeholder">Page ${i+1}</div>`}
           </div>
           <div class="diff-hash">#${pageA.hash.substring(0, 8)}</div>
         `;
@@ -1360,7 +1360,7 @@
         rightCol.innerHTML = `
           <div class="diff-page-num">File B · Page ${i + 1}</div>
           <div class="diff-img-box">
-            ${pageB.previewUrl ? `<img src="${pageB.previewUrl}" alt="B-${i+1}">` : `<div class="diff-placeholder">📄 Page ${i+1}</div>`}
+            ${pageB.previewUrl ? `<img src="${pageB.previewUrl}" alt="B-${i+1}">` : `<div class="diff-placeholder">Page ${i+1}</div>`}
           </div>
           <div class="diff-hash">#${pageB.hash.substring(0, 8)}</div>
         `;

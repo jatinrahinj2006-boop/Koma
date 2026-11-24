@@ -16,7 +16,7 @@
         </div>
         <div class="brand-text">
           <h1>Koma <span style="font-size: 10px; opacity: 0.7; font-weight: 500; background: rgba(225,29,72,0.2); padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(225,29,72,0.3); color: #fda4af;">v1.3.4</span></h1>
-          <span class="badge" id="detected-site-badge">Detecting page...</span>
+          <span class="badge" id="detected-site-badge">No active tab</span>
         </div>
       </div>
     </header>
@@ -25,25 +25,25 @@
     <div class="info-card">
       <div class="info-row">
         <span class="label">ZIP Name:</span>
-        <input type="text" id="series-title-input" class="title-input" placeholder="Manga Title..." value="Reading page...">
+        <input type="text" id="series-title-input" class="title-input" placeholder="Series title" value="">
       </div>
       <div class="info-row">
         <span class="label">Current Ch:</span>
-        <span class="value highlight" id="current-chapter-num">--</span>
-        <span class="badge history-badge hidden" id="history-badge">Last: Ch --</span>
+        <span class="value highlight" id="current-chapter-num">-</span>
+        <span class="badge history-badge hidden" id="history-badge"></span>
       </div>
     </div>
 
-    <!-- Side Panel, PDF Studio & Dup Checker Buttons -->
-    <div style="display: flex; gap: 6px;">
-      <button id="btn-open-sidepanel" class="btn secondary-btn" style="flex: 1;" title="Open Reviewer Side Panel">
-        <span>📱 Side Panel</span>
+    <!-- Quick Nav: Side Panel, PDF Studio & Dup Checker -->
+    <div class="quick-nav-bar">
+      <button id="btn-open-sidepanel" class="quick-nav-btn" title="Open Reviewer Side Panel">
+        <span>Side Panel</span>
       </button>
-      <button id="btn-open-pdf-studio" class="btn secondary-btn" style="flex: 1; border-color: rgba(99, 102, 241, 0.4); color: #a5b4fc;" title="Open PDF Studio Compiler">
-        <span>⚡ PDF Studio</span>
+      <button id="btn-open-pdf-studio" class="quick-nav-btn" title="Open PDF Studio Compiler">
+        <span>PDF Studio</span>
       </button>
-      <button id="btn-open-pdf-dupchecker" class="btn secondary-btn" style="flex: 1; border-color: rgba(245, 158, 11, 0.4); color: #fcd34d;" title="Open PDF Duplicate Checker">
-        <span>🔍 Dup Checker</span>
+      <button id="btn-open-pdf-dupchecker" class="quick-nav-btn" title="Open PDF Duplicate Checker">
+        <span>Dup Checker</span>
       </button>
     </div>
 
@@ -52,7 +52,7 @@
       <button class="tab-btn active" data-tab="single-tab">Current Ch</button>
       <button class="tab-btn" data-tab="batch-tab">Batch (X–Y)</button>
       <button class="tab-btn" data-tab="toc-tab" id="tab-btn-toc">Series TOC</button>
-      <button class="tab-btn" data-tab="history-tab">History & ★</button>
+      <button class="tab-btn" data-tab="history-tab">History & Saved</button>
     </div>
 
     <!-- Scrollable content area -->
@@ -60,17 +60,16 @@
       <!-- Tab 1: Single Chapter -->
       <div class="tab-content active" id="single-tab">
         <button id="btn-download-single" class="btn primary-btn">
-          <span class="btn-icon">⚡</span>
-          <span>Download This Chapter</span>
+          <span>Download Chapter</span>
         </button>
 
         <!-- Thumbnail Preview Grid Toggle -->
         <div class="preview-toggle-row">
           <button id="btn-toggle-preview" class="btn secondary-btn small-btn">
-            <span>🖼️ Rearrange & Select (<span id="detected-count">0</span>)</span>
+            <span>Rearrange & Select (<span id="detected-count">0</span>)</span>
           </button>
           <button id="btn-pdf-preview" class="btn secondary-btn small-btn accent">
-            <span>📄 Live PDF Preview</span>
+            <span>Live PDF Preview</span>
           </button>
         </div>
 
@@ -110,13 +109,12 @@
             <option value="chapter_zip">Separate ZIP per Chapter</option>
           </select>
         </div>
-        <div class="setting-item checkbox-item" style="margin: 8px 0; background: rgba(99, 102, 241, 0.12); padding: 8px 10px; border-radius: 6px; border: 1px solid rgba(99, 102, 241, 0.3);">
+        <div class="setting-item checkbox-item highlight-box">
           <input type="checkbox" id="batch-parallel-toggle" checked>
-          <label for="batch-parallel-toggle" style="font-weight: 600; color: #a5b4fc; cursor: pointer;">⚡ 5x Multi-Tab Parallel Engine (5 Chs at once)</label>
+          <label for="batch-parallel-toggle">5x Multi-Tab Parallel Engine</label>
         </div>
-        <button id="btn-download-batch" class="btn primary-btn accent">
-          <span class="btn-icon">📚</span>
-          <span>Download Chapters Range</span>
+        <button id="btn-download-batch" class="btn primary-btn">
+          <span>Download Chapter Range</span>
         </button>
       </div>
 
@@ -129,8 +127,8 @@
         <div class="toc-list" id="toc-list">
           <p class="empty-hint">Open a series main page to scan chapter TOC.</p>
         </div>
-        <button id="btn-download-toc-selected" class="btn primary-btn accent" style="margin-top:8px;">
-          <span>📚 Download Selected Chapters</span>
+        <button id="btn-download-toc-selected" class="btn primary-btn" style="margin-top:8px;">
+          <span>Download Selected Chapters</span>
         </button>
       </div>
 
@@ -138,10 +136,10 @@
       <div class="tab-content" id="history-tab">
         <div class="sub-tab-menu">
           <button class="sub-tab-btn active" id="btn-sub-history">Download History</button>
-          <button class="sub-tab-btn" id="btn-sub-bookmarks">★ Bookmarks</button>
+          <button class="sub-tab-btn" id="btn-sub-bookmarks">Saved Bookmarks</button>
         </div>
         <button id="btn-add-bookmark" class="btn secondary-btn small-btn" style="margin-bottom:8px;">
-          <span>★ Bookmark Current Page</span>
+          <span>Bookmark Current Page</span>
         </button>
         <div class="history-list" id="history-list">
           <!-- Dynamically populated history/bookmark cards -->
@@ -174,12 +172,12 @@
 
         <div class="setting-item checkbox-item">
           <input type="checkbox" id="parallel-download-toggle" checked>
-          <label for="parallel-download-toggle">⚡ 5x Multi-Tab Parallel Downloader (5 Chs at once)</label>
+          <label for="parallel-download-toggle">5x Multi-Tab Parallel Downloader</label>
         </div>
 
         <div class="setting-item checkbox-item">
           <input type="checkbox" id="background-mode-toggle" checked>
-          <label for="background-mode-toggle">Run in Background Tab (Browse & minimize freely)</label>
+          <label for="background-mode-toggle">Run in Background Tab</label>
         </div>
 
         <div class="setting-item checkbox-item">
@@ -225,7 +223,7 @@
     <!-- Download Queue Card -->
     <div class="queue-card hidden" id="queue-card">
       <div class="queue-header">
-        <span>📋 Download Queue (<span id="queue-count">0</span>)</span>
+        <span>Download Queue (<span id="queue-count">0</span>)</span>
         <button id="btn-clear-queue" class="text-link">Clear Done</button>
       </div>
       <div class="queue-list" id="queue-list">
@@ -239,14 +237,14 @@
     <span class="lightbox-close" id="pdf-preview-close">&times;</span>
     <div class="pdf-modal-card">
       <div class="pdf-modal-header">
-        <span>📄 Live PDF Page Preview (<span id="pdf-current-page-num">1</span>/<span id="pdf-total-pages-num">1</span>)</span>
+        <span>PDF Page Preview (<span id="pdf-current-page-num">1</span>/<span id="pdf-total-pages-num">1</span>)</span>
       </div>
       <div class="pdf-preview-viewport">
         <img id="pdf-preview-img" src="" alt="PDF Page Preview">
       </div>
       <div class="pdf-nav-row">
-        <button id="pdf-prev-btn" class="btn secondary-btn small-btn">◀ Prev Page</button>
-        <button id="pdf-next-btn" class="btn secondary-btn small-btn">Next Page ▶</button>
+        <button id="pdf-prev-btn" class="btn secondary-btn small-btn">Previous</button>
+        <button id="pdf-next-btn" class="btn secondary-btn small-btn">Next</button>
       </div>
     </div>
   </div>

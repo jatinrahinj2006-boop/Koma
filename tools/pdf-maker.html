@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Manga PDF Studio & Chapter Organizer</title>
+  <title>Koma — PDF Studio & Chapter Organizer</title>
   <link rel="stylesheet" href="pdf-maker.css">
 </head>
 <body>
@@ -12,19 +12,19 @@
     <div class="nav-brand-group">
       <img src="../icons/icon-48.png" alt="Logo" width="28" height="28" class="nav-logo">
       <div class="nav-brand-text">
-        <span class="nav-title">Manga PDF Suite</span>
+        <span class="nav-title">Koma PDF Suite</span>
         <span class="nav-subtitle">Compiler & Duplicate Checker</span>
       </div>
     </div>
 
     <div class="nav-tabs-group">
       <button class="nav-tab-btn active" id="tab-btn-studio" type="button">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        <span>⚡ PDF Studio & Compiler</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span>PDF Studio</span>
       </button>
       <button class="nav-tab-btn" id="tab-btn-dupchecker" type="button">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <span>🔍 PDF Duplicate Checker</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Duplicate Checker</span>
         <span class="dup-tab-badge" id="header-dup-badge" style="display: none;">0 Dups</span>
       </button>
     </div>
@@ -77,7 +77,7 @@
         
         <div class="form-group">
           <label for="series-name-input">Manga / Series Title:</label>
-          <input type="text" id="series-name-input" class="form-input" placeholder="e.g. Solo Leveling">
+          <input type="text" id="series-name-input" class="form-input" placeholder="Series title (optional)">
         </div>
 
         <div class="form-group">
@@ -153,7 +153,7 @@
           <p class="dup-desc">Identical pages detected across chapters.</p>
           <div id="credit-banner-wrap" style="display: none; margin-top: 6px; padding-top: 6px; border-top: 1px dashed rgba(245, 158, 11, 0.3);">
             <button id="btn-auto-exclude-credits" class="small-btn warning" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 4px;">
-              <span>🧹 Exclude Scanlation Credit Banners</span>
+              <span>Exclude Scanlation Credit Banners</span>
             </button>
           </div>
         </div>
@@ -161,9 +161,9 @@
 
       <!-- History & Past Compilation Card -->
       <div class="sidebar-section" id="history-sidebar-section">
-        <div class="dup-card" id="history-dup-card" style="display: none; background: rgba(99, 102, 241, 0.1); border-color: rgba(99, 102, 241, 0.3);">
+        <div class="dup-card" id="history-dup-card" style="display: none; background: rgba(225, 29, 72, 0.08); border-color: rgba(225, 29, 72, 0.25);">
           <div class="dup-header">
-            <span class="dup-badge" id="history-dup-count" style="color: #a5b4fc;">0 in History</span>
+            <span class="dup-badge" id="history-dup-count">0 in History</span>
             <button id="btn-skip-history-compiled" class="small-btn">Skip Compiled</button>
           </div>
           <p class="dup-desc">Some imported chapters were previously compiled into PDFs.</p>
@@ -185,7 +185,6 @@
       <!-- Action Button -->
       <div class="compile-box">
         <button id="btn-compile-pdf" class="compile-btn" disabled>
-          <span class="btn-icon">⚡</span>
           <span>Generate PDF Document</span>
         </button>
       </div>
@@ -216,9 +215,9 @@
         </div>
 
         <div class="header-actions">
-          <button id="btn-expand-all" class="secondary-btn" title="Expand and Preview All Pages">👁️ Preview All</button>
-          <button id="btn-collapse-all" class="secondary-btn" title="Collapse All Chapter Previews">📁 Collapse</button>
-          <button id="btn-reverse-all" class="secondary-btn" title="Reverse Chapter Order">🔄 Flip</button>
+          <button id="btn-expand-all" class="secondary-btn" title="Expand and Preview All Pages">Preview All</button>
+          <button id="btn-collapse-all" class="secondary-btn" title="Collapse All Chapter Previews">Collapse</button>
+          <button id="btn-reverse-all" class="secondary-btn" title="Reverse Chapter Order">Reverse Order</button>
           <button id="btn-select-all" class="secondary-btn">Select All</button>
           <button id="btn-deselect-all" class="secondary-btn">Deselect All</button>
           <button id="btn-clear-all" class="secondary-btn danger">Clear</button>
@@ -228,7 +227,7 @@
       <!-- Empty State Dropzone -->
       <div class="dropzone-empty" id="dropzone-empty">
         <div class="drop-illustration">
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
         </div>
         <h2>Drop ZIP / CBZ Files or Manga Folders Here</h2>
         <p>Supports multi-chapter ZIPs, folders with subfolders, and all image formats (.jpg, .png, .webp, .avif, .gif, .bmp).</p>
@@ -253,7 +252,9 @@
       <!-- Duplicate Checker Sidebar -->
       <aside class="dup-sidebar">
         <div class="brand">
-          <div class="dup-brand-icon">🔍</div>
+          <div class="dup-brand-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
           <div>
             <h1>Duplicate Checker</h1>
             <span class="sub-badge">Deep Content & Hash Matcher</span>
@@ -306,17 +307,17 @@
           <label class="section-title">Deduplication Actions</label>
           <div class="dup-actions-column">
             <button id="btn-dup-autoselect" class="action-btn primary-action-btn" title="Keep the best original file in each set and mark redundant copies for deletion">
-              <span>⚡ Auto-Select Redundant Copies</span>
+              <span>Auto-Select Redundant Copies</span>
             </button>
             <button id="btn-dup-download-clean" class="action-btn secondary" title="Bundle only the unique, kept PDFs into a clean ZIP">
-              <span>📦 Download Cleaned PDFs (.ZIP)</span>
+              <span>Download Cleaned PDFs (.zip)</span>
             </button>
             <div style="display: flex; gap: 8px;">
               <button id="btn-dup-export-report" class="action-btn secondary" style="flex: 1;" title="Export duplicate findings report">
-                <span>📑 Export Report</span>
+                <span>Export Report</span>
               </button>
               <button id="btn-dup-clear-all" class="action-btn secondary danger" style="flex: 1;" title="Clear all PDFs from memory">
-                <span>🗑️ Clear All</span>
+                <span>Clear All</span>
               </button>
             </div>
           </div>
@@ -326,7 +327,7 @@
         <div class="sidebar-section">
           <label class="section-title">Filter Findings</label>
           <div class="dup-search-box">
-            <input type="text" id="dup-search-input" class="form-input" placeholder="🔍 Filter by PDF title / path…">
+            <input type="text" id="dup-search-input" class="form-input" placeholder="Filter by PDF title or path…">
           </div>
           <div class="dup-filter-pills">
             <button class="dup-filter-pill active" data-filter="all">All</button>
@@ -350,8 +351,8 @@
           </div>
 
           <div class="header-actions">
-            <button id="btn-dup-expand-all" class="secondary-btn" title="Expand All Duplicate Groups">👁️ Expand All</button>
-            <button id="btn-dup-collapse-all" class="secondary-btn" title="Collapse All">📁 Collapse All</button>
+            <button id="btn-dup-expand-all" class="secondary-btn" title="Expand All Duplicate Groups">Expand All</button>
+            <button id="btn-dup-collapse-all" class="secondary-btn" title="Collapse All">Collapse All</button>
           </div>
         </header>
 

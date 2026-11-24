@@ -321,14 +321,14 @@
         background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(99, 102, 241, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.14);
         color: #f8fafc;
         padding: 10px 18px;
         border-radius: 30px;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         font-size: 13px;
         font-weight: 600;
-        box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3), 0 0 15px rgba(99, 102, 241, 0.1);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
         cursor: pointer;
         transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
         user-select: none;
@@ -337,8 +337,8 @@
       }
       .floating-widget:hover {
         transform: translateY(-2px) scale(1.02);
-        box-shadow: 0 14px 36px rgba(99, 102, 241, 0.45), 0 0 20px rgba(99, 102, 241, 0.2);
-        border-color: rgba(99, 102, 241, 0.65);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+        border-color: rgba(225, 29, 72, 0.5);
       }
       .floating-widget:active {
         transform: translateY(0) scale(1);

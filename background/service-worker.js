@@ -280,7 +280,7 @@ function stopKeepAlive() {
   }
 }
 
-function updateExtensionBadge(text, color = '#6366f1') {
+function updateExtensionBadge(text, color = '#E11D48') {
   try {
     if (chrome.action && chrome.action.setBadgeText) {
       chrome.action.setBadgeText({ text: text ? String(text) : '' });
@@ -605,7 +605,7 @@ async function processNextQueueItem() {
   currentActiveJobId = nextJob.id;
   isCancelled = false;
   startKeepAlive();
-  updateExtensionBadge('RUN', '#6366f1');
+  updateExtensionBadge('RUN', '#E11D48');
 
   await updateJobState(nextJob.id, { status: 'processing', progress: 0, message: 'Starting...' });
 
@@ -984,7 +984,7 @@ async function handleBatchRangeDownload(tabId, options) {
       async function processChapter(task, worker, targetZip) {
         if (isCancelled || !worker || !worker.id) return;
 
-        updateExtensionBadge(String(task.chapterNum), '#6366f1');
+        updateExtensionBadge(String(task.chapterNum), '#E11D48');
 
         await updateState({
           status: 'processing',

@@ -102,11 +102,14 @@ document.addEventListener('DOMContentLoaded', async () => {
               detectedCountEl.textContent = detectedImages.length;
               renderVerticalStripList(detectedImages);
             }
+          } else {
+            currentChapterNumEl.textContent = '-';
           }
         });
       }).catch((e) => {
         // Tab is not a standard web page or scripting is restricted
         console.warn('Scripting not allowed on this tab:', e);
+        currentChapterNumEl.textContent = '-';
       });
     } catch (e) {
       console.warn('Could not read tab URL:', e);
@@ -519,7 +522,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (item.pageUrl) {
         const resumeBtn = document.createElement('button');
         resumeBtn.className = 'btn secondary-btn small-btn';
-        resumeBtn.textContent = '▶ Resume';
+        resumeBtn.textContent = 'Resume';
         resumeBtn.addEventListener('click', () => {
           chrome.tabs.create({ url: item.pageUrl });
         });
@@ -564,7 +567,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const openBtn = document.createElement('button');
       openBtn.className = 'btn secondary-btn small-btn';
-      openBtn.textContent = '🔗 Open';
+      openBtn.textContent = 'Open';
       openBtn.addEventListener('click', () => {
         chrome.tabs.create({ url: bm.url });
       });
@@ -795,7 +798,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   function renderJobState(state) {
     if (!state || state.status === 'idle' || state.status === 'completed' || state.status === 'cancelled') {
       if (state && (state.status === 'completed' || state.status === 'cancelled')) {
-        progressStatusTitle.textContent = state.status === 'completed' ? 'Done! 🎉' : 'Cancelled';
+        progressStatusTitle.textContent = state.status === 'completed' ? 'Completed' : 'Cancelled';
         progressSubtext.textContent = state.message || '';
         progressBarFill.style.width = '100%';
         progressPercent.textContent = '100%';
@@ -863,7 +866,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (job.status === 'queued' || job.status === 'processing') {
         const cancelBtn = document.createElement('button');
         cancelBtn.className = 'queue-item-cancel';
-        cancelBtn.textContent = '✕ Cancel';
+        cancelBtn.textContent = 'Cancel';
         cancelBtn.addEventListener('click', () => {
           chrome.runtime.sendMessage({ action: 'CANCEL_JOB', jobId: job.id });
         });

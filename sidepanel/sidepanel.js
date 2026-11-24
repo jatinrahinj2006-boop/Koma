@@ -219,6 +219,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             emptyState.style.display = 'block';
             panelGrid.innerHTML = '';
             panelsCountEl.textContent = '0 Panels';
+            chapterLabelEl.textContent = 'No chapter';
           }
         });
       }).catch((e) => {
@@ -226,6 +227,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         emptyState.style.display = 'block';
         panelGrid.innerHTML = '';
         panelsCountEl.textContent = '0 Panels';
+        chapterLabelEl.textContent = 'No chapter';
       });
     } catch (e) {
       console.warn('Sidepanel tab query error:', e);
@@ -502,7 +504,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   function renderJobState(state) {
     if (!state || state.status === 'idle' || state.status === 'completed' || state.status === 'cancelled') {
       if (state && (state.status === 'completed' || state.status === 'cancelled')) {
-        progressTitle.textContent = state.status === 'completed' ? 'Done! 🎉' : 'Cancelled';
+        progressTitle.textContent = state.status === 'completed' ? 'Completed' : 'Cancelled';
         progressSub.textContent = state.message || '';
         progressFill.style.width = '100%';
         progressPct.textContent = `${100}%`;
@@ -562,7 +564,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (job.status === 'queued' || job.status === 'processing') {
         const cancelBtn = document.createElement('button');
         cancelBtn.className = 'queue-item-cancel';
-        cancelBtn.textContent = '✕ Cancel';
+        cancelBtn.textContent = 'Cancel';
         cancelBtn.addEventListener('click', () => {
           chrome.runtime.sendMessage({ action: 'CANCEL_JOB', jobId: job.id });
         });

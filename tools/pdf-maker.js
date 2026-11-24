@@ -802,10 +802,10 @@ function updateDupStats() {
     creditBannerWrap.style.display = scanlationBannerHashes.size > 0 ? 'block' : 'none';
     if (btnAutoExcludeCredits) {
       if (unexcludedBanners === 0 && scanlationBannerHashes.size > 0) {
-        btnAutoExcludeCredits.innerHTML = `<span>✓ All ${scanlationBannerHashes.size} Credit Banners Excluded</span>`;
+        btnAutoExcludeCredits.innerHTML = `<span>All ${scanlationBannerHashes.size} Credit Banners Excluded</span>`;
         btnAutoExcludeCredits.style.opacity = '0.7';
       } else {
-        btnAutoExcludeCredits.innerHTML = `<span>🧹 Exclude ${unexcludedBanners} Credit Banner(s) in All Chapters</span>`;
+        btnAutoExcludeCredits.innerHTML = `<span>Exclude ${unexcludedBanners} Credit Banner(s) in All Chapters</span>`;
         btnAutoExcludeCredits.style.opacity = '1';
       }
     }
@@ -1295,8 +1295,8 @@ function renderAll() {
           // Replace broken image with a placeholder tile
           thumbImg.style.display = 'none';
           const placeholder = document.createElement('div');
-          placeholder.style.cssText = 'width:100%;height:160px;background:#1e293b;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#475569;font-size:11px;';
-          placeholder.textContent = '⚠ Cannot preview';
+          placeholder.style.cssText = 'width:100%;height:160px;background:#141720;border:1px solid rgba(255,255,255,0.08);border-radius:4px;display:flex;align-items:center;justify-content:center;color:#5E6573;font-size:11px;';
+          placeholder.textContent = 'Preview unavailable';
           pageCard.insertBefore(placeholder, thumbImg.nextSibling);
         };
 

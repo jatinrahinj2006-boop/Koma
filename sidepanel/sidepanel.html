@@ -16,7 +16,7 @@
         </div>
         <div class="brand-info">
           <h2>Koma Reviewer</h2>
-          <span class="site-badge" id="sp-site-badge">Detecting...</span>
+          <span class="site-badge" id="sp-site-badge">No active tab</span>
         </div>
       </div>
     </header>
@@ -25,11 +25,11 @@
     <div class="series-card">
       <div class="input-row">
         <label for="sp-series-title-input" class="input-label">ZIP Name:</label>
-        <input type="text" id="sp-series-title-input" class="sp-title-input" placeholder="Manga Title..." value="Reading Comic...">
+        <input type="text" id="sp-series-title-input" class="sp-title-input" placeholder="Series title" value="">
       </div>
       <div class="series-meta">
-        <span id="sp-chapter-label">Chapter: --</span>
-        <span class="history-badge hidden" id="sp-history-badge">Last: Ch --</span>
+        <span id="sp-chapter-label">No chapter</span>
+        <span class="history-badge hidden" id="sp-history-badge"></span>
         <span class="panels-count" id="sp-panels-count">0 Panels</span>
       </div>
     </div>
@@ -78,7 +78,7 @@
         </div>
       </div>
       <div class="settings-row toggles-row">
-        <label class="toggle-label" style="color: #a5b4fc; font-weight: 600;"><input type="checkbox" id="sp-parallel-toggle" checked> ⚡ 5x Parallel</label>
+        <label class="toggle-label highlight-label"><input type="checkbox" id="sp-parallel-toggle" checked> 5x Parallel</label>
         <label class="toggle-label"><input type="checkbox" id="sp-high-res-toggle" checked> High-Res</label>
         <label class="toggle-label"><input type="checkbox" id="sp-auto-split-toggle" checked> Split Strips</label>
         <label class="toggle-label"><input type="checkbox" id="sp-filter-promos-toggle" checked> No Promos</label>
@@ -86,14 +86,14 @@
       </div>
 
       <div class="action-buttons-row">
-        <button id="sp-btn-pdf-studio" class="secondary-btn" title="Open Manga PDF Studio" style="border-color: rgba(99, 102, 241, 0.4); color: #a5b4fc;">
-          <span>🛠️ PDF Studio</span>
+        <button id="sp-btn-pdf-studio" class="secondary-btn" title="Open Manga PDF Studio">
+          <span>PDF Studio</span>
         </button>
         <button id="sp-btn-pdf-preview" class="secondary-btn">
-          <span>📄 Preview</span>
+          <span>Preview</span>
         </button>
         <button id="sp-btn-download-selected" class="primary-btn">
-          <span>⚡ Download (<span id="sp-selected-count">0</span>)</span>
+          <span>Download (<span id="sp-selected-count">0</span>)</span>
         </button>
       </div>
     </footer>
@@ -114,7 +114,7 @@
     <!-- Download Queue Card -->
     <div class="queue-card hidden" id="sp-queue-card">
       <div class="queue-header">
-        <span>📋 Download Queue (<span id="sp-queue-count">0</span>)</span>
+        <span>Download Queue (<span id="sp-queue-count">0</span>)</span>
         <button id="sp-btn-clear-queue" class="text-link">Clear Done</button>
       </div>
       <div class="queue-list" id="sp-queue-list">
@@ -128,14 +128,14 @@
     <span class="lightbox-close" id="sp-pdf-modal-close">&times;</span>
     <div class="pdf-modal-card">
       <div class="pdf-modal-header">
-        <span>📄 Live PDF Page Preview (<span id="sp-pdf-current-page">1</span>/<span id="sp-pdf-total-pages">1</span>)</span>
+        <span>PDF Page Preview (<span id="sp-pdf-current-page">1</span>/<span id="sp-pdf-total-pages">1</span>)</span>
       </div>
       <div class="pdf-preview-viewport">
         <img id="sp-pdf-img" src="" alt="PDF Page Preview">
       </div>
       <div class="pdf-nav-row">
-        <button id="sp-pdf-prev-btn" class="secondary-btn small-btn">◀ Prev Page</button>
-        <button id="sp-pdf-next-btn" class="secondary-btn small-btn">Next Page ▶</button>
+        <button id="sp-pdf-prev-btn" class="secondary-btn small-btn">Previous</button>
+        <button id="sp-pdf-next-btn" class="secondary-btn small-btn">Next</button>
       </div>
     </div>
   </div>

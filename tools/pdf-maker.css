@@ -1,22 +1,22 @@
 :root {
-  --bg-primary: #0a0f1d;
-  --bg-secondary: #131b2e;
-  --bg-card: rgba(26, 36, 61, 0.7);
-  --bg-card-hover: rgba(35, 48, 80, 0.9);
+  --bg-primary: #0B0D11;
+  --bg-secondary: #12151D;
+  --bg-card: #151923;
+  --bg-card-hover: #1C2230;
   --border-color: rgba(255, 255, 255, 0.08);
-  --border-accent: rgba(99, 102, 241, 0.4);
+  --border-accent: rgba(225, 29, 72, 0.35);
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
-  --accent-primary: #6366f1;
-  --accent-secondary: #8b5cf6;
-  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  --accent-primary: #E11D48;
+  --accent-secondary: #F43F5E;
+  --accent-gradient: #E11D48;
   --danger: #ef4444;
   --warning: #f59e0b;
   --success: #10b981;
   --radius-lg: 12px;
   --radius-md: 8px;
   --radius-sm: 6px;
-  --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.3);
+  --shadow-glow: none;
 }
 
 * {
@@ -77,7 +77,7 @@ body {
 
 .brand-logo {
   border-radius: var(--radius-md);
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 4px 12px rgba(225, 29, 72, 0.25);
 }
 
 .brand h1 {
@@ -126,7 +126,7 @@ body {
   border-radius: var(--radius-md);
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.25);
+  
 }
 
 .action-btn:hover {
@@ -262,7 +262,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: var(--shadow-glow);
+  
   transition: all 0.2s ease;
 }
 
@@ -349,7 +349,7 @@ body {
 }
 
 .stat-pill strong {
-  color: #a5b4fc;
+  color: #F4F5F7;
 }
 
 .stat-pill.dup-pill {
@@ -405,7 +405,7 @@ body {
   font-weight: 600;
   font-size: 13px;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+  
 }
 
 /* Empty State Dropzone */
@@ -426,13 +426,13 @@ body {
 
 .dropzone-empty.drag-over {
   border-color: var(--accent-primary);
-  background: rgba(99, 102, 241, 0.05);
+  background: rgba(225, 29, 72, 0.05);
 }
 
 .drop-illustration {
   width: 96px;
   height: 96px;
-  background: rgba(99, 102, 241, 0.1);
+  background: rgba(225, 29, 72, 0.08);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -482,7 +482,7 @@ body {
 }
 
 .chapter-card.selected {
-  border-color: rgba(99, 102, 241, 0.45);
+  border-color: rgba(225, 29, 72, 0.35);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
@@ -573,7 +573,7 @@ body {
 
 .page-thumb-card.selected {
   border-color: var(--accent-primary);
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+  box-shadow: 0 4px 12px rgba(225, 29, 72, 0.15);
 }
 
 .page-thumb-card.excluded {
@@ -625,7 +625,7 @@ body {
 
 .page-num {
   font-weight: 700;
-  color: #a5b4fc;
+  color: #F4F5F7;
 }
 
 .page-thumb-img {
@@ -730,13 +730,13 @@ body {
 .chapter-title-input:focus {
   border-color: var(--accent-primary);
   background: rgba(10, 15, 29, 0.95);
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25);
+  box-shadow: 0 0 0 2px rgba(225, 29, 72, 0.20);
 }
 
 /* History Badges and Items */
 .stat-pill.hist-pill {
-  background: rgba(99, 102, 241, 0.15);
-  border-color: rgba(99, 102, 241, 0.35);
+  background: rgba(225, 29, 72, 0.12);
+  border-color: rgba(225, 29, 72, 0.30);
 }
 
 .stat-pill.hist-pill strong {
@@ -788,8 +788,8 @@ body {
   font-size: 10px;
   font-weight: 700;
   color: #818cf8;
-  background: rgba(99, 102, 241, 0.18);
-  border: 1px solid rgba(99, 102, 241, 0.35);
+  background: rgba(225, 29, 72, 0.15);
+  border: 1px solid rgba(225, 29, 72, 0.30);
   padding: 2px 7px;
   border-radius: 10px;
   margin-left: 6px;
@@ -928,9 +928,9 @@ body {
   gap: 4px;
   font-size: 11px;
   font-weight: 600;
-  color: #a5b4fc;
-  background: rgba(99, 102, 241, 0.12);
-  border: 1px solid rgba(99, 102, 241, 0.3);
+  color: #F4F5F7;
+  background: rgba(225, 29, 72, 0.10);
+  border: 1px solid rgba(225, 29, 72, 0.25);
   padding: 5px 10px;
   border-radius: var(--radius-sm);
   cursor: pointer;
@@ -938,7 +938,7 @@ body {
 }
 
 .chapter-toggle-expand:hover {
-  background: rgba(99, 102, 241, 0.25);
+  background: rgba(225, 29, 72, 0.20);
 }
 
 .page-thumb-card {
@@ -1028,7 +1028,7 @@ body {
 .nav-tab-btn.active {
   background: var(--accent-gradient);
   color: #fff;
-  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.35);
+  box-shadow: 0 2px 8px rgba(225, 29, 72, 0.30);
 }
 
 .dup-tab-badge {
@@ -1188,11 +1188,11 @@ body {
 }
 
 .dup-group-card.match-name_collision {
-  border-left: 4px solid #6366f1;
+  border-left: 4px solid #E11D48;
 }
 
 .dup-group-card.match-subset {
-  border-left: 4px solid #8b5cf6;
+  border-left: 4px solid #F43F5E;
 }
 
 .dup-group-header {
@@ -1245,9 +1245,9 @@ body {
 }
 
 .dup-badge-type.name_collision {
-  background: rgba(99, 102, 241, 0.2);
-  color: #a5b4fc;
-  border: 1px solid rgba(99, 102, 241, 0.4);
+  background: rgba(225, 29, 72, 0.15);
+  color: #F4F5F7;
+  border: 1px solid rgba(225, 29, 72, 0.35);
 }
 
 .dup-badge-type.subset {
